@@ -129,7 +129,8 @@ contract Auction {
         delete bidsHistory[msg.sender];
         bidsHistory[msg.sender].push(lastValidUserBid);
 
-        payable(msg.sender).transfer(excess * 98 / 100);
-        emit DepositPartiallyRefunded(msg.sender, excess);
+        uint256 refundAmount = excess * 98 / 100;
+        payable(msg.sender).transfer(refundAmount);
+        emit DepositPartiallyRefunded(msg.sender, refundAmount);
     }
 }
