@@ -117,6 +117,10 @@ contract Auction {
                 emit DepositRefunded(bidder, refundAmount);
             }
         }
+
+        if (highestBid.amount > 0) {
+            payable(owner).transfer(highestBid.amount);
+        }
     }
 
     function withdrawExcess() external auctionActive noReentrancy hasExcess hasBids {
